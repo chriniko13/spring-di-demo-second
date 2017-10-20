@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <beans profile="dev">
+
+        <!-- Start: Basic configuration here -->
+        <context:component-scan base-package="spring.di.demo">
+            <context:include-filter type="regex" expression=".*Demonstrator"/>
+            <context:include-filter type="assignable" expression="spring.di.demo.validator.Validator"/>
+        </context:component-scan>
+
+        <context:property-placeholder location="classpath:application.properties" />
+        <!-- End: Basic configuration here -->
+
+        <!-- Start: Define your beans here-->
+        <bean id="motorcycleRepository" class="spring.di.demo.repository.MotorcycleRepositoryImpl" lazy-init="false">
+            <property name="db">
+                <util:map map-class="java.util.concurrent.ConcurrentHashMap">
+                    <entry key="1" value="#{new spring.di.demo.domain.Motorcycle(1L, 'Suzuki', 'Gsxr600', '2005')}"/>
+                    <entry key="2" value="#{new spring.di.demo.domain.Motorcycle(2L, 'Kawasaki', 'ZX6R', '2005')}"/>
+                    <entry key="3" value="#{new spring.di.demo.domain.Motorcycle(3L, 'Kawasaki', 'Z1000', '2010')}"/>
+                    <entry key="4" value="#{new spring.di.demo.domain.Motorcycle(4L, 'Ducati', 'S4R', '2003')}"/>
+                    <entry key="5" value="#{new spring.di.demo.domain.Motorcycle(5L, 'Ducati', 'S4', '2003')}"/>
+                    <entry key="6" value="#{new spring.di.demo.domain.Motorcycle(6L, 'Ducati', 'S4RS', '2002')}"/>
+                    <entry key="7" value="#{new spring.di.demo.domain.Motorcycle(7L, 'Yamaha', 'FZ6-S2', '2006')}"/>
+                    <entry key="8" value="#{new spring.di.demo.domain.Motorcycle(8L, 'Yamaha', 'FZ1', '2007')}"/>
+                    <entry key="9" value="#{new spring.di.demo.domain.Motorcycle(9L, 'Yamaha', 'R1', '2008')}"/>
+                    <entry key="10" value="#{new spring.di.demo.domain.Motorcycle(10L, 'Yamaha', 'R6', '2010')}"/>
+                </util:map>
+            </property>
+        </bean>
+
+
+        <bean id="initA" class="spring.di.demo.init.InitA"
+              lazy-init="false"
+              scope="singleton"
+              init-method="init"
+              destroy-method="destroy"/>
+        <bean id="initB" class="spring.di.demo.init.InitB"
+              depends-on="initA"
+              lazy-init="false"
+              scope="singleton"
+              init-method="init"
+              destroy-method="destroy"/>
+        <bean id="initC"  class="spring.di.demo.init.InitC"
+              depends-on="initB"
+              lazy-init="false"
+              scope="singleton"
+              init-method="init"
+              destroy-method="destroy"/>
+
+
+        <!--<bean id="someService" class="spring.di.demo.service.SomeService" autowire="byType"/>-->
+        <!--<bean id="someService" class="spring.di.demo.service.SomeService" autowire="constructor"/>-->
+        <bean id="someService" class="spring.di.demo.service.SomeService" autowire="byName"/>
+        <bean id="someRepository" class="spring.di.demo.repository.SomeRepository"/>
+
+
+        <alias name="someValidator" alias="chrinikoValidator"/>
+
+        <!-- End: Define your beans here-->
+
+
+    </beans>
+
+
+</beans>

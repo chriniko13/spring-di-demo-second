@@ -95,6 +95,6 @@ local.properties
 
 
 # Personal
-spring-di-demo2.iml
-.idea
 /target
+spring-di-demo-2.iml
+.idea/*

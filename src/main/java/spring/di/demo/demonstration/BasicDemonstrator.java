@@ -3,9 +3,9 @@ package spring.di.demo.demonstration;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import spring.di.demo.domain.Balloon;
 import spring.di.demo.domain.Motorcycle;
 import spring.di.demo.service.HeavyCalculation;
 import spring.di.demo.service.MessageService;
@@ -99,8 +99,27 @@ public class BasicDemonstrator implements ApplicationContextAware {
         ((SomeValidator) applicationContext.getBean("chrinikoValidator")).validate("yolo-data-here");
     }
 
+    public void runSeventhExample() {
+
+        System.out.println("\n------running seventh example------");
+
+        Balloon balloon1 = applicationContext.getBean("balloon1", Balloon.class);
+        System.out.println("balloon1 == " + balloon1);
+
+        Balloon balloon2 = applicationContext.getBean("balloon2", Balloon.class);
+        System.out.println("balloon2 == " + balloon2);
+
+        Balloon balloon3 = applicationContext.getBean("balloon3", Balloon.class);
+        System.out.println("balloon3 == " + balloon3);
+
+        Balloon balloon4 = applicationContext.getBean("balloon4", Balloon.class);
+        System.out.println("balloon4 == " + balloon4);
+    }
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
+
+
 }

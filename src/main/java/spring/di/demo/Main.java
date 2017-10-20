@@ -20,6 +20,7 @@ public class Main {
         basicDemonstrator.runFourthExample();
         basicDemonstrator.runFifthExample();
         basicDemonstrator.runSixthExample();
+        basicDemonstrator.runSeventhExample();
     }
 
     private static ApplicationContext getApplicationContext() {

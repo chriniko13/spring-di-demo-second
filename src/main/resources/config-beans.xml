@@ -65,6 +65,15 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.
 
         <alias name="someValidator" alias="chrinikoValidator"/>
 
+
+        <bean id="balloonFactory" class="spring.di.demo.factory.BalloonFactory"/>
+        <bean id="balloon1" factory-bean="balloonFactory" factory-method="createBalloon"/>
+        <bean id="balloon2" factory-bean="balloonFactory" factory-method="createBalloon"/>
+        <bean id="balloon3" factory-bean="balloonFactory" factory-method="createBalloon"/>
+
+
+        <bean id="balloon4" class="spring.di.demo.factory.BalloonFactoryBean"/>
+
         <!-- End: Define your beans here-->
 
 

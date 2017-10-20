@@ -21,6 +21,7 @@ public class Main {
         basicDemonstrator.runFifthExample();
         basicDemonstrator.runSixthExample();
         basicDemonstrator.runSeventhExample();
+        basicDemonstrator.runEighthExample();
     }
 
     private static ApplicationContext getApplicationContext() {

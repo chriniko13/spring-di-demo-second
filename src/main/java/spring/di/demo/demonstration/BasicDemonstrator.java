@@ -7,10 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import spring.di.demo.domain.Balloon;
 import spring.di.demo.domain.Motorcycle;
-import spring.di.demo.service.HeavyCalculation;
-import spring.di.demo.service.MessageService;
-import spring.di.demo.service.MotorcycleService;
-import spring.di.demo.service.SomeService;
+import spring.di.demo.service.*;
 import spring.di.demo.timer.Timer;
 import spring.di.demo.validator.SomeValidator;
 
@@ -28,6 +25,9 @@ public class BasicDemonstrator implements ApplicationContextAware {
     @Autowired
     //@Qualifier("heavy") //Note: comment-uncomment to see what happens...
     private HeavyCalculation heavyCalculation;
+
+    @Autowired
+    private SampleService sampleService;
 
     @Autowired
     public BasicDemonstrator(MotorcycleService motorcycleService, SomeService someService, MessageService messageService) {
@@ -114,6 +114,19 @@ public class BasicDemonstrator implements ApplicationContextAware {
 
         Balloon balloon4 = applicationContext.getBean("balloon4", Balloon.class);
         System.out.println("balloon4 == " + balloon4);
+    }
+
+
+    public void runEighthExample() {
+
+        System.out.println("\n------running eighth example------");
+
+        sampleService.foo();
+
+        ((ChrinikoService)applicationContext.getBean("chrinikoService")).boom();
+
+        ((SpringRocks)applicationContext.getBean("springRocks")).foo();
+
     }
 
     @Override

@@ -93,3 +93,8 @@ local.properties
 .scala_dependencies
 .worksheet
 
+
+# Personal
+spring-di-demo2.iml
+.idea
+/target
